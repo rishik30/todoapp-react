@@ -32,9 +32,13 @@ export class ToDoApp extends React.Component {
         console.log("list", this.state.todoList)
     }
 
-    _handleDelete(item) {
-        console.log(item)
-
+    _handleDelete(itemToDelete) {
+        // let newList = this.state.todoList.filter((item) => {
+        //     return item=itemToDelete                             /* First method to delete an elemnt from the list */
+        // })
+        let position = this.state.todoList.indexOf(itemToDelete)    /* Second method to delete an elemnt from the list */
+        this.state.todoList.splice(position, 1)                     /* Self created */
+        this.setState({todoList: this.state.todoList})
     }
 
 }

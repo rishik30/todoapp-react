@@ -4,15 +4,9 @@ export class TodoTask extends React.Component {
 
     render() {
         return(
-            <li className="todo-task" onClick={e=>this._delete.bind(this)}>
+            <li className="todo-task">
                 {this.props.task}
-                {/* <Svg src="/img/delete-cross.svg" /> */}
             </li>
         )
-    }
-
-    _delete() {
-        this.props.onClick(this.props.id)
-        console.log("delete", this.props.id)
     }
 }

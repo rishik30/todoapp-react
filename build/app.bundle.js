@@ -21520,7 +21520,7 @@
 	                    'todo app'
 	                ),
 	                _react2.default.createElement(_todoInput.TodoInput, { createTask: this._createTask.bind(this) }),
-	                _react2.default.createElement(_todoList.TodoList, { data: this.state.todoList, handleDelete: this._handleDelete })
+	                _react2.default.createElement(_todoList.TodoList, { data: this.state.todoList, handleDelete: this._handleDelete.bind(this) })
 	            );
 	        }
 	    }, {
@@ -21535,8 +21535,8 @@
 	        }
 	    }, {
 	        key: '_handleDelete',
-	        value: function _handleDelete(toDeleteId) {
-	            console.log("delete", toDeleteId);
+	        value: function _handleDelete(item) {
+	            console.log(item);
 	        }
 	    }]);
 
@@ -21578,7 +21578,10 @@
 	    function TodoList(props) {
 	        _classCallCheck(this, TodoList);
 
-	        return _possibleConstructorReturn(this, (TodoList.__proto__ || Object.getPrototypeOf(TodoList)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (TodoList.__proto__ || Object.getPrototypeOf(TodoList)).call(this, props));
+
+	        _this.delId = 0;
+	        return _this;
 	    }
 
 	    _createClass(TodoList, [{
@@ -21594,15 +21597,9 @@
 	                        key: i,
 	                        task: listItem.task,
 	                        id: listItem.id,
-	                        onClick: _this2._handleDelete });
+	                        onClick: _this2.props.handleDelete.bind(_this2, listItem.id) });
 	                })
 	            );
-	        }
-	    }, {
-	        key: '_handleDelete',
-	        value: function _handleDelete(toDeleteId) {
-	            this.props.handleDelete(toDeleteId);
-	            console.log("delete", toDeleteId);
 	        }
 	    }]);
 

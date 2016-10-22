@@ -20,8 +20,8 @@ export class TodoInput extends React.Component {
 
     _handleCreate(e) {
         e.preventDefault();
+        if(this.list.value == "") return null
         this.props.createTask(this.list.value)
-        console.log(this.list)
         this.list.value = ''
     }
 }

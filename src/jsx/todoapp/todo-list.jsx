@@ -9,14 +9,14 @@ export class TodoList extends React.Component {
     }
 
     render() {
+        let deleteFunction = this.props.handleDelete
         return(
             <ul className="todo-list">
                 {this.props.data.map((listItem, i) => {
-                    return <TodoTask
-                                key={i}
-                                task={listItem.task}
-                                id={listItem.id}
-                                onClick={this.props.handleDelete.bind(this, listItem.id)} />
+                    return <div key={i}>
+                            <TodoTask task={listItem.task} id={listItem.id} />
+                            <span onClick={this.props.handleDelete.bind(this,listItem)}>[x]</span>
+                            </div>
                 })}
             </ul>
         )
