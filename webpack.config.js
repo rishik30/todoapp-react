@@ -21,14 +21,16 @@ var configuration = {
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract("style-loader!css-loader!sass-loader")
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+            },
+            {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
             }
         ]
     },
     plugins: [
-        new ExtractTextPlugin("build/style.css", {
-            allChunks: true
-        })
+        new ExtractTextPlugin("style.css")
     ]
 }
 

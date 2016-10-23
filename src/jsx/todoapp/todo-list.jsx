@@ -13,9 +13,9 @@ export class TodoList extends React.Component {
         return(
             <ul className="todo-list">
                 {this.props.data.map((listItem, i) => {
-                    return <div key={i}>
+                    return <div className="list-item" key={i}>
                             <TodoTask task={listItem.task} id={listItem.id} />
-                            <span onClick={this.props.handleDelete.bind(this,listItem)}>[x]</span>
+                            <Svg src="/img/delete-cross.svg" onClick={this.props.handleDelete.bind(this,listItem)} />
                             </div>
                 })}
             </ul>

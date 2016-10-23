@@ -61,6 +61,8 @@
 
 	var _todoapp = __webpack_require__(172);
 
+	__webpack_require__(177);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21535,8 +21537,13 @@
 	        }
 	    }, {
 	        key: '_handleDelete',
-	        value: function _handleDelete(item) {
-	            console.log(item);
+	        value: function _handleDelete(itemToDelete) {
+	            // let newList = this.state.todoList.filter((item) => {
+	            //     return item=itemToDelete                             /* First method to delete an elemnt from the list */
+	            // })
+	            var position = this.state.todoList.indexOf(itemToDelete); /* Second method to delete an elemnt from the list */
+	            this.state.todoList.splice(position, 1); /* Self created */
+	            this.setState({ todoList: this.state.todoList });
 	        }
 	    }]);
 
@@ -21589,15 +21596,17 @@
 	        value: function render() {
 	            var _this2 = this;
 
+	            var deleteFunction = this.props.handleDelete;
 	            return _react2.default.createElement(
 	                'ul',
 	                { className: 'todo-list' },
 	                this.props.data.map(function (listItem, i) {
-	                    return _react2.default.createElement(_todoTask.TodoTask, {
-	                        key: i,
-	                        task: listItem.task,
-	                        id: listItem.id,
-	                        onClick: _this2.props.handleDelete.bind(_this2, listItem.id) });
+	                    return _react2.default.createElement(
+	                        'div',
+	                        { className: 'list-item', key: i },
+	                        _react2.default.createElement(_todoTask.TodoTask, { task: listItem.task, id: listItem.id }),
+	                        _react2.default.createElement(_svg.Svg, { src: '/img/delete-cross.svg', onClick: _this2.props.handleDelete.bind(_this2, listItem) })
+	                    );
 	                })
 	            );
 	        }
@@ -21643,21 +21652,11 @@
 	    _createClass(TodoTask, [{
 	        key: "render",
 	        value: function render() {
-	            var _this2 = this;
-
 	            return _react2.default.createElement(
 	                "li",
-	                { className: "todo-task", onClick: function onClick(e) {
-	                        return _this2._delete.bind(_this2);
-	                    } },
+	                { className: "todo-task" },
 	                this.props.task
 	            );
-	        }
-	    }, {
-	        key: "_delete",
-	        value: function _delete() {
-	            this.props.onClick(this.props.id);
-	            console.log("delete", this.props.id);
 	        }
 	    }]);
 
@@ -21778,14 +21777,20 @@
 	        key: "_handleCreate",
 	        value: function _handleCreate(e) {
 	            e.preventDefault();
+	            if (this.list.value == "") return null;
 	            this.props.createTask(this.list.value);
-	            console.log(this.list);
 	            this.list.value = '';
 	        }
 	    }]);
 
 	    return TodoInput;
 	}(_react2.default.Component);
+
+/***/ },
+/* 177 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ]);
